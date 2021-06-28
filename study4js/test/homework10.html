@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #descripter{
+      position: absolute;
+      left: 70vw;
+    }
+    input{
+      height: 10vh;
+      width: 30vw;
+      font-size: 7vh;
+    }
+    p{
+      font-size: 7vh;
+    }
+  </style>
+  <title>demo 11 - 04</title>
+</head>
+<body>
+  <div id="descripter">
+    <p>姓名 宋孟阳</p>
+    <p>学号 2019414033</p>
+    <p>作业 编程作业10</p>
+  </div>
+
+  <input type="text" maxlength="10" id="a" oninput="calculator.listner()">
+  <input type="text" maxlength="10" id="b" oninput="calculator.listner()">
+  <p id="sumR"></p>
+  <p id="mulR"></p>
+  <p id="reminder" >请输入数字!</p>
+  <p id="test"></p>
+<script>
+  document.getElementById('reminder').style.visibility='hidden';
+  var al,bl;
+  let calculator = {
+    sum(){
+      if (al == '') { al = 0 };
+      if (bl == '') { bl = 0 };
+      return (+al) + (+bl)
+    },
+    multiply(){
+      if (al == '') { al = 1 };
+      if (bl == '') { bl = 1 };
+      return al * bl
+    },
+    listner(){
+      al = document.getElementById("a").value;
+      bl = document.getElementById("b").value;
+      if(!isNaN(Number(al)) && !isNaN(Number(bl))){
+        document.getElementById('reminder').style.visibility = 'hidden';
+        document.getElementById("sumR").innerHTML =calculator.sum();
+        document.getElementById("mulR").innerHTML =calculator.multiply();
+      }
+      else{
+        if(al=='-'||bl=='-'){return}
+        else{document.getElementById('reminder').style.visibility = 'visible';}
+      }
+      // x1 = isNaN(+al);
+      // x2 = isNaN(+bl);
+      // document.getElementById('test').innerText=x1+","+x2+","+al;
+    }
+  }
+</script>
+<script>
+  class Square{
+    constructor (border=0){
+      this.border = (+border);
+    }
+    set border(x){
+      if (!isNaN(x)){
+        this._border=x;
+        return
+      }
+      else{
+        return "invalid input"
+      }
+    }
+    get border(){
+      return this._border
+    }
+    getPerimeter = ()=>  this.border * 4;
+    getArea = ()=> this.border * this.border;
+    
+  }
+  var homo114514 = new Square(2);
+  document.write(homo114514.getPerimeter())
+  document.write("<br/>")
+  document.write(homo114514.getArea())
+  
+  // homo = new Square(3);
+  // document.getElementById('test').innerText = homo.getPerimeter();
+  // document.getElementById('test').innerText = homo.getArea();
+</script>
+
+</body>
+</html>

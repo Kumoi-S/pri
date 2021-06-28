@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+    bakStr = '1+0.123456'
+
+    // const getLastNum = ()=>
+    //     parseFloat(
+
+    //         parseFloat(
+    //             bakStr.split("").reverse().join("")
+    //         ).toString()
+
+    //         .split("").reverse().join("")
+
+    //     )
+        // FIXME: 0.12346会出错
+
+
+    // const getLastNum = ()=>
+    //     bakStr.split("").reverse().join("")
+    //         .match(/\d+.?\d*/)[0].toString()
+    //         .split("").reverse().join("");
+
+
+
+    // document.write(getLastNum())
+
+    var a = bakStr.split("").reverse().join("");
+    document.write(typeof(bakStr));
+    document.write('<br>');
+    document.write(a)
+
+</script>
+</body>
+</html>

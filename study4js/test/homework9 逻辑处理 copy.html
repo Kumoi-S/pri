@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        border: 0px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -o-user-select:none;
+        user-select:none;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(to right,
+                rgba(255, 186, 221,0.8),
+                rgba(127, 127, 245,0.8)
+                );
+        }
+        #hider{
+            visibility: hidden;
+        }
+        .container{
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0.6),
+                rgba(255,255,255,0.1)
+            );
+            position: absolute;
+            left: 10vw;
+            top: 5vw;
+            width: 50vmin;
+            height: 70vmin;
+            border-radius: 6vmin;
+            box-shadow: inset -20px -20px 20px rgba(255, 255, 255, 0.4),
+                        inset 10px 10px 20px rgba(0,0,0,0.2);
+            border:1px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        table{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        tbody{
+            margin-top: 5vmin;
+        }
+
+        .btn{
+            width: 10vmin;
+            height: 10vmin;
+            font-size: 5vmin;
+            margin: 0.5vmin 0.3vmin;
+            background-color: #f4f4f4;
+            transition: background-color 0.4s ease-in-out,
+                        box-shadow 0.4s ease-in-out;
+            border-radius: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+        }
+        .buttonDown{
+            width: 10vmin;
+            height: 10vmin;
+            font-size: 5vmin;
+            margin: 0.5vmin 0.3vmin;
+            background-color: rgb(206, 110, 72);
+            transition: background-color 0.6s ease-in-out;
+            border-radius: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: none;
+        }
+        .buttonDown:hover{
+            width: 10vmin;
+            height: 10vmin;
+            font-size: 5vmin;
+            margin: 0.5vmin 0.3vmin;
+            background-color: rgb(224, 129, 91);
+            transition: background-color 0.4s ease-in-out;
+            border-radius: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 10px rgba(255,255,255,0.6),
+                        inset 3px 3px 5px rgba(0,0,0,0.2),
+                        1px 1px 10px rgba(0,0,0,0.2);
+        }
+        button:hover{
+            background-color: rgb(247, 233, 216);
+            box-shadow: inset -5px -5px 10px rgba(255,255,255,0.6),
+                        inset 3px 3px 5px rgba(0,0,0,0.2),
+                        1px 1px 10px rgba(0,0,0,0.2);
+        }
+        button:active{
+            background-color: rgb(206, 110, 72);
+            transition:0.2s;
+            box-shadow: inset -3px -3px 5px rgba(255,255,255,0.6),
+                        inset 3px 3px 5px rgba(0,0,0,0.2);
+        }
+        #text{
+            height: 12vmin;
+            width: 40vmin;
+            position: relative;
+            left: 5vmin;
+            top: 4vmin;
+            background-color: aliceblue;
+            border-radius: 3vmin;
+            font-size: 7vmin;
+            cursor: default;
+            box-shadow: 1vmin 1vmin 2vmin rgba(0,0,0,0.2);
+            text-shadow: 0 0 0 #000;
+            text-align: right;
+        }
+        #text:focus{
+            outline: none;
+            color:transparent;
+        }
+        #descripter{
+            position:absolute;
+            left: 640px;
+            top: 700px;
+        }
+    </style>
+</head>
+<body>
+    <p id='useForTest'></p>
+<div id="hider">
+    <p>姓名 宋孟阳</p>
+    <p>学号 2019414033</p>
+    <p>作业 编程作业10</p>
+</div>
+
+<div class="container">
+    
+    <table>
+        <input type="text" id='text' value="123">
+        <tbody>
+            <tr class="tr">
+                <td><button class = 'btn' onclick="inNum('1')">1</button></td>
+                <td><button class = 'btn' onclick="inNum('2')">2</button></td>
+                <td><button class = 'btn' onclick="inNum('3')">3</button></td>
+                <td><button class = 'btn' id='plusID' onclick="plus()"    >+</button></td>
+            </tr>
+            <tr class="tr">
+                <td><button class = 'btn' onclick="inNum('4')">4</button></td>
+                <td><button class = 'btn' onclick="inNum('5')">5</button></td>
+                <td><button class = 'btn' onclick="inNum('6')">6</button></td>
+                <td><button class = 'btn' id='minusID' onclick="minus()"   >-</button></td>
+            </tr>
+            <tr class="tr">
+                <td><button class = 'btn' onclick="inNum('7')">7</button></td>
+                <td><button class = 'btn' onclick="inNum('8')">8</button></td>
+                <td><button class = 'btn' onclick="inNum('9')">9</button></td>
+                <td><button class = 'btn' id='multiplyID' onclick="multiply()">*</button></td>
+            </tr>
+            <tr class="tr">
+                <td><button class = 'btn' onclick="Clear()"     >C</button></td>
+                <td><button class = 'btn' onclick="inNum(0)"    >0</button></td>
+                <td><button class = 'btn' onclick="calculator('equal')">=</button></td>
+                <td><button class = 'btn' id='divideID' onclick="divide()"    >/</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id='descripter'>
+    <p>姓名:宋孟阳</p>
+    <p>学号:2019414033</p>
+    <p>作业:编程作业10</p>
+</div>
+<script>
+// 这个计算器可以:
+    //      计算时改变符号
+    //      科学计数法
+    //      一点点微不足道的动效
+    //      稳定的格式化输出10个数字
+// ===========================================================================
+    // 测试用, 显示bakStr储存的表达式
+    function doTest(a){
+        // 显示bakStr在左上角
+        document.getElementById('useForTest').innerHTML = a;
+    }
+    // showStr用于展示输出和临时储存数据(等于时), bakStr用于计算
+    var showStr = '';
+    var bakStr = '';
+    var operatorStatus = false;
+    var opts1 = '+-*/';
+    var opts2 = '*/';
+// ===========以下为输出和外观部分==================================================
+const data = {
+        screenSize : 10
+    }
+    // 标准化为10个数字(不包括小数点)
+    function standarlizer(res){
+        let result = res.toString();
+        // raise error: No 虚数!
+        if (result.match(/[^a-zA-Z]+i/) !== null){
+            bakStr = '';
+            showStr = '';
+            document.getElementById('text').value = 'No 虚数';
+        }
+        // 若出现未知错误
+        else if (result.match(/[a-zA-Z]/) !== null){
+            bakStr = '';
+            showStr = '';
+            document.getElementById('text').value = 'Error!';
+        }
+        // 输出长度大于十位的情况
+        else if (result.length > 10){
+            let parts = result.split('.');
+            // parts[0] = 整数部分; parts[1] = 小数部分
+            let X = parts[0].length - 1;
+            // 若整数部分大于十位,则使用科学计数法,末尾为eX,保留剩下的位数
+            if (parts[0].length>10){
+                // 若整数部分大于十位
+                let exp = Number(result).toExponential();
+                let cutPosition = data.screenSize - (exp.length - exp.indexOf('e') - 1) - 3;
+                showStr = Number(exp.slice(0,exp.indexOf('e'))).toFixed(cutPosition).toString()+exp.slice(exp.indexOf('e'),);
+                document.getElementById('text').value = showStr;
+            }
+            else {
+                // 若为整数部分不大于十位的小数
+                showStr = (+result).toFixed(10-(X+1));
+                document.getElementById('text').value = showStr;
+            }
+        }
+        // 正常情况
+        else {  
+            showStr = result;
+            document.getElementById('text').value = result;
+        }
+    } 
+    // 依据bakStr计算结果, 此时共有两种情况, 一是等号调用, 二是其他符号调用
+    function calculator(a){
+        // 防止在被'='按钮调用时末尾已有符号
+        checkerOperator(bakStr);
+        // 使用eval进行计算bakStr
+        bakStr = eval(bakStr).toString();
+        // 格式化输出
+        standarlizer(bakStr);
+        if (a=='equal'){
+            operatorStatus = true;
+            bakStr = '';
+        }
+        else {operatorStatus = false;}
+    }
+    // 对应'C'或者'AC'键
+    function Clear(){
+        showStr = '';
+        bakStr = '';
+        operatorStatus = false;
+        cancelhighlight();
+        document.getElementById('text').value = showStr;
+                                                                                        // doTest(bakStr);
+    }
+    // 高亮operator对应的按钮
+    function highlight(optid) {
+        document.getElementById(optid).className = 'buttonDown';
+    }
+    // 取消所有高亮
+    function cancelhighlight(){
+        for (let i of document.getElementsByTagName('button')){
+            i.className = 'btn';
+        }
+    }
+// ==============以下为功能模块======================================================
+    // 检查此前是否已经存在 加减乘除 符号
+    function checker1(str){
+        for (let i of opts1){
+            if (bakStr.indexOf(i) !== -1){
+                return false
+            }
+        }
+        return true
+    }
+    // 检查此前是否已经存在 乘除 符号
+    function checker2(str){
+        for (let i of opts2) {
+            if (bakStr.indexOf(i) !== -1) {
+                return false
+            }
+        }
+        return true
+    }
+    // 若末尾为符号, 则删除最后一个字符(符号),取消所有符号的高亮 
+    function checkerOperator(str){
+        if (str.match(/[\+\-\*\/]$/) !== null){
+            // showStr = showStr.slice(0,-1);
+            bakStr = bakStr.slice(0,-1);
+            cancelhighlight();
+            return true
+        }
+    }
+// ==============以下为计算模块======================================================
+    function inNum(num){
+            if (showStr=='0' && num=='0') {return}
+            bakStr += num;
+            if(operatorStatus){
+                showStr = '';
+                showStr += num;
+                operatorStatus = false;
+                cancelhighlight();
+                standarlizer(showStr);
+                document.getElementById('text').value = showStr;
+            }
+            else{
+                showStr += num;
+                document.getElementById('text').value = showStr;
+                standarlizer(showStr);
+            }
+                                                                                            // doTest(bakStr); 
+        }
+    function plus(){
+        // 此情况为 通过'='按键计算出结果后, 尾随加号, 则继续计算
+        if (bakStr== ''&&operatorStatus){
+            bakStr = showStr;
+            bakStr += '+';
+            highlight('plusID');
+            return
+        }
+        // 初始状态, 跳过
+        if (bakStr == '' ){return}
+        // 如果最后一个字符是符号
+        if (checkerOperator(bakStr)){
+            bakStr += '+';
+        }
+        // 此时最后一定不是符号, 故如果存在符号, 则计算
+        else if (checker1(bakStr)==false){
+            calculator();
+            bakStr += '+';
+            operatorStatus = true;
+        }
+        else {
+            bakStr += '+';
+            operatorStatus = true;
+        }
+        highlight('plusID');
+                                                                                    // doTest(bakStr);
+        return
+    }  
+    // 后面的都与加法同理
+    function minus(){
+        if (bakStr == '' && operatorStatus) {
+            bakStr = showStr;
+            bakStr += '-'
+            highlight('minusID');
+            return
+        }
+        // 啥都没输入呢就来点加号, 跳过
+        if (bakStr == '') { return }
+        if (checkerOperator(bakStr)) {
+            bakStr += '-';
+        }
+        else if (checker1(bakStr) == false) {
+            doTest(operatorStatus);
+            calculator();
+            bakStr += '-';
+            operatorStatus = true;
+        }
+        else {
+            bakStr += '-';
+            operatorStatus = true;
+        }
+        highlight('minusID');
+                                                                                        // doTest(bakStr);
+        return
+    }
+    function multiply(){
+        if (bakStr == '' && operatorStatus) {
+            bakStr = showStr;
+            bakStr += '*';
+            highlight('multiplyID');
+            return
+        }
+        if (bakStr == '') { return }
+        if (checkerOperator(bakStr)) {
+            bakStr += '*';
+        }
+        else if (checker2(bakStr) == false) {
+            calculator();
+            bakStr += '*';
+            operatorStatus = true;
+        }
+        else {
+            bakStr += '*';
+            operatorStatus = true;
+        }
+        highlight('multiplyID');
+                                                                                        // doTest(bakStr);
+        return
+    }
+    function divide(){
+        if (bakStr == '' && operatorStatus) {
+            bakStr = showStr;
+            bakStr += '/';
+            highlight('divideID');
+            return
+        }
+        if (bakStr == '') { return }
+        if (checkerOperator(bakStr)) {
+            bakStr += '/';
+        }
+        else if (checker1(bakStr) == false) {
+            calculator();
+            bakStr += '/';
+            operatorStatus = true;
+        }
+        else {
+            bakStr += '/';
+            operatorStatus = true;
+        }
+        highlight('divideID');
+                                                                                        // doTest(bakStr);
+        return
+    }
+
+
+    const getLastNum = ()=>
+        bakStr.split("").reverse().join("")
+            .match(/\d+.?\d*/)[0].toString()
+            .split("").reverse().join("");
+
+
+    // TODO: 优化逻辑为: 输入的符号先用另一个变量储存，只有当输入数字时，才会输入此前的符号
+
+    // \思考正则算法实现? 似乎不太现实
+    // TODO\: 思考如何规避0.1+0.2问题
+    //        由于最多保留十位小数,同时不可以直接输入小数点,因此十五位小数的精度在大多数情况下可以忽略,但极端情况仍然会给出错误结果
+    //        可以通过转化为整数计算来规避, 太麻烦不写了
+    // TODO\: 思考bakStr是否保存输入历史        不加了
+    //          若保存, 则需要每次计算疯狂加括号
+    //          且调取历史记录时根据算法(遍历获得index,逆序,查找对比相邻的两个符号)去括号后, 再输出
+    //          或者在录入bakStr时根据需要加括号
+    //          输出方式 ?
+    // TODO\: 不能处理的情况_虚数? \\ !已规避
+    //  FIXME\: id标签, operator部分未用驼峰式书写  ||好了这个大写折腾了我半小时
+    
+</script>
+</body>
+</html>

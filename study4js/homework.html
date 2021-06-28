@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(to right,
+                    rgba(255, 186, 221, 0.8),
+                    rgba(127, 127, 245, 0.8));
+        }
+
+        #hider {
+            visibility: hidden;
+        }
+
+        .container {
+            background: linear-gradient(to bottom right,
+                    rgba(255, 255, 255, 0.6),
+                    rgba(255, 255, 255, 0.1));
+            position: absolute;
+            left: 10vw;
+            top: 5vw;
+            width: 55vmin;
+            height: 80vmin;
+            border-radius: 6vmin;
+            box-shadow: inset -20px -20px 20px rgba(255, 255, 255, 0.4),
+                inset 10px 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        table {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        tbody {
+            margin-top: 6vmin;
+        }
+
+        .btn {
+            width: 10vmin;
+            height: 10vmin;
+            font-size: 5vmin;
+            margin: 0.6vmin 0.6vmin;
+            background-color: rgba(244, 244, 244, 0.7);
+            transition: background-color 0.4s ease-in-out,
+                box-shadow 0.4s ease-in-out;
+            border-radius: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2),
+                inset -5px -5px 20px rgba(0, 0, 0, 0.2),
+                inset 2px 2px 10px rgba(255, 255, 255, 0.9);
+        }
+
+        .buttonDown {
+            width: 10vmin;
+            height: 10vmin;
+            font-size: 5vmin;
+            margin: 0.6vmin 0.6vmin;
+            background-color: rgb(206, 110, 72);
+            transition: background-color 0.6s ease-in-out;
+            border-radius: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: none;
+        }
+
+        .buttonDown:hover {
+            width: 10vmin;
+            height: 10vmin;
+            font-size: 5vmin;
+            margin: 0.6vmin 0.6vmin;
+            background-color: rgb(224, 129, 91);
+            transition: background-color 0.4s ease-in-out;
+            border-radius: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.6),
+                inset 3px 3px 5px rgba(0, 0, 0, 0.2),
+                1px 1px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: rgb(247, 233, 216);
+            transition: background-color 0.4s ease-in-out;
+            box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.6),
+                inset 3px 3px 5px rgba(0, 0, 0, 0.2),
+                1px 1px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            background-color: rgb(206, 110, 72);
+            transition: 0.2s;
+            box-shadow: inset -3px -3px 5px rgba(255, 255, 255, 0.6),
+                inset 3px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #text {
+            height: 12vmin;
+            width: 45vmin;
+            position: relative;
+            left: 5vmin;
+            top: 4vmin;
+            background-color: rgba(240, 248, 255, 0.8);
+            border-radius: 3vmin;
+            font-size: 7vmin;
+            cursor: default;
+            box-shadow: 1vmin 1vmin 2vmin rgba(0, 0, 0, 0.2);
+            text-shadow: 0 0 0 #000;
+            text-align: right;
+        }
+
+        #text:focus {
+            outline: none;
+            color: transparent;
+        }
+
+        #descripter {
+            position: absolute;
+            left: 640px;
+            top: 700px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <p id='useForTest'></p>
+
+    <div class="container">
+
+        <table>
+            <input type="text" id='text' value="0">
+            <tbody>
+                <tr class="tr">
+                    <td><button class='btn' onclick="a.clear()">C</button></td>
+                    <td><button class='btn' onclick="a.swiMinus()">+/-</button></td>
+                    <td><button class='btn' id='moId' onclick="a.percent()">%</button></td>
+                    <td><button class='btn' id='divideId' onclick="a.opt('/')">/</button></td>
+                </tr>
+                <tr class="tr">
+                    <td><button class='btn' onclick="a.inNum('7')">7</button></td>
+                    <td><button class='btn' onclick="a.inNum('8')">8</button></td>
+                    <td><button class='btn' onclick="a.inNum('9')">9</button></td>
+                    <td><button class='btn' id='multiplyId' onclick="a.opt('*')">*</button></td>
+                </tr>
+                <tr class="tr">
+                    <td><button class='btn' onclick="a.inNum('4')">4</button></td>
+                    <td><button class='btn' onclick="a.inNum('5')">5</button></td>
+                    <td><button class='btn' onclick="a.inNum('6')">6</button></td>
+                    <td><button class='btn' id='minusId' onclick="a.opt('-')">-</button></td>
+                </tr>
+                <tr class="tr">
+                    <td><button class='btn' onclick="a.inNum('1')">1</button></td>
+                    <td><button class='btn' onclick="a.inNum('2')">2</button></td>
+                    <td><button class='btn' onclick="a.inNum('3')">3</button></td>
+                    <td><button class='btn' id='plusId' onclick="a.opt('+')">+</button></td>
+                </tr>
+                <tr class="tr">
+                    <td><button class='btn' onclick="a.inNum(0)">0</button></td>
+                    <td><button class='btn' onclick="a.inNum(0)">0</button></td>
+                    <td><button class='btn' onclick="a.dot()">.</button></td>
+                    <td><button class='btn' onclick="a.equal()">=</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id='descripter'>
+        <p>姓名:宋孟阳</p>
+        <p>学号:2019414033</p>
+        <p>姓名:龙翔宇</p>
+        <p>学号:2019414026</p>
+        <p>姓名:钱辉</p>
+        <p>学号:2019414030</p>
+    </div>
+
+    <script>
+        // " *** " 指添加历史记录功能需要改的地方
+        // " --- " 指可能存在问题的地方
+        // 遗憾: 1. 不支持键盘输入 2. 不能直接生成多个计算器,需要调代码 3.一开始没把这几个变量想清楚, 结果有点小翻车, 反正一点点补救已经把这个计算器补成屎山了
+        //      4. 历史记录功能并没有实现, 因为没啥乱用而且这段代码构思的很屎不想看了
+        // bug: 1. "6.1-6=" 输出结果为0.1000000         ~ calculate()里面防了一手, 但并没有什么卵用
+        //      2. 能在显示屏上输入数字(但并没有什么卵用)
+
+        // 该计算器:
+        // 1.能比较优雅地进行科学计算和输入(试着输入11个7)
+
+        class Calculator {
+            constructor() {
+                this.currentNum = '';
+                this.currentRes = 0;
+                this.currentOpt = '';
+                this.memoryOpt = '';
+                this.historyNum = [];
+                this.historyOpt = [];
+                this.list = []; // ***
+                this.showStr = '';
+                this.inEqual = false;
+                this.dotting = false;
+            }
+            reset() {
+                this.currentNum = '';
+                this.currentRes = 0;
+                this.currentOpt = '';
+                this.memoryOpt = '';
+                // this.historyNumList = [];
+                // this.historyOptList = [];
+                // ***
+                this.showStr = '';
+                this.inEqual = false;
+                this.dotting = false;
+                this.cancelhighlight();
+                document.getElementById('text').value = 0;
+            }
+            clear() {
+                this.reset()
+            }
+            standarlizer(result) {
+                if (result.match(/[^a-zA-Z]+i/) !== null) {
+                    this.reset();
+                    document.getElementById('text').value = 'No 虚数';
+                }
+                // else if (result.match(/[a-zA-Z]/) !== null){
+                //     this.reset();
+                //     document.getElementById('text').value = 'Error!';
+                // }
+                else if (result.length > 10) {
+                    let parts = result.split('.');
+                    // parts[0] = 整数部分; parts[1] = 小数部分
+                    let X = parts[0].length - 1;
+
+                    if (parts[0].length > 10) {
+                        // 若整数部分大于十位
+                        let exp = Number(result).toExponential();
+                        let cutPosition = data.screenSize - (exp.length - exp.indexOf('e') - 1) - 3;
+                        this.showStr = Number(exp.slice(0, exp.indexOf('e'))).toFixed(cutPosition).toString() + exp
+                            .slice(exp.indexOf('e'), );
+                        document.getElementById('text').value = this.showStr;
+                    } else {
+                        // 若为整数部分不大于十位的小数
+                        this.showStr = (+result).toFixed(10 - (X + 1));
+                        document.getElementById('text').value = this.showStr;
+                    }
+                }
+                // FIXME: 对于过于长的数, js默认会用科学计数法表示, 这时候会翻车
+                else {
+                    document.getElementById('text').value = this.showStr;
+                }
+            }
+            calculate() {
+                if (this.currentNum.includes('.') && this.currentRes.toString().includes('.')) {
+                    // 防止出现0.1+0.2=114514的情况, 将其中一个数字转换为整数进行加减
+
+                    let counter = 0;
+                    let cN_ = this.currentNum.split(".");
+                    let cR_ = this.currentRes.toString().split(".");
+
+                    while (cN_[1].length > 0 && cR_[1].length > 0) {
+                        cN_[0] = cN_[0] + cN_[1][0];
+                        // 小数部分的第一位追加到整数
+                        cN_[1] = cN_[1].slice(1, );
+                        // 去除小数部分第一位
+                        cR_[0] = cR_[0] + cR_[1][0];
+                        cR_[1] = cR_[1].slice(1, );
+                        counter += 1;
+                    }
+
+                    if (cN_[1].length > 0) {
+                        cN_ = cN_.join(".");
+                    } else {
+                        cN_ = cN_.join("");
+                    }
+
+                    if (cR_[1].length > 0) {
+                        cR_ = cR_.join(".");
+                    } else {
+                        cR_ = cR_.join("");
+                    }
+
+                    this.currentRes = eval(parseFloat(cR_) + this.memoryOpt + parseFloat(cN_));
+                    // 为什么要加parseFloat? 因为0.1在之前的变换中变成了01,解释器进行解析时会把这个数字当成八进制,从而报错
+                    if (this.memoryOpt == '*') {
+                        this.currentRes = this.currentRes / (10 ** (counter * 2));
+                    } else if (this.memoryOpt == '/') {} else {
+                        this.currentRes = this.currentRes / (10 ** counter);
+                    }
+                    //     switch (this.memoryOpt){
+                    //         case "+":
+                    //             // this.currentRes = eval(this.currentRes.toString() + this.memoryOpt + this.currentNum);
+                    //             break;
+                    //         case '-':
+                    //             // this.currentRes = eval(this.currentRes.toString() + this.memoryOpt + this.currentNum);
+                    //             break;
+                    //         case '*':
+                    //             // this.currentRes = eval(this.currentRes.toString() + this.memoryOpt + this.currentNum);
+                    //             break;
+                    //         case '/':
+                    //             // this.currentRes = eval(this.currentRes.toString() + this.memoryOpt + this.currentNum);
+                    //             break;
+                    //    }
+
+                } else {
+                    this.currentRes = eval(this.currentRes.toString() + this.memoryOpt + this.currentNum);
+                }
+                this.currentNum = '';
+                this.memoryOpt = '';
+                this.showStr = this.currentRes.toString();
+
+                this.standarlizer(this.showStr);
+            }
+            equal() {
+                if (this.currentOpt == '') {
+                    return
+                }
+                this.calculate();
+                this.inEqual = true;
+            }
+
+            inNum(num) {
+
+                if (this.inEqual) {
+                    this.reset();
+                    // ***
+                }
+                if (this.currentOpt !== '' && this.dotting == false) {
+                    this.memoryOpt = this.currentOpt;
+                    this.currentNum = '';
+                }
+                if (num == 0 && this.currentNum == 0 && this.currentRes == 0) {
+                    return
+                }
+
+                this.cancelhighlight();
+                this.currentNum += num;
+                if (this.currentOpt == '') {
+                    this.currentRes = parseFloat(this.currentNum);
+                }
+                this.showStr = this.currentNum;
+                this.standarlizer(this.showStr);
+            }
+            dot() {
+                if (this.showStr.includes(".")) {
+                    this.dotting = true;
+                }
+                if (!this.dotting) {
+                    if (this.currentNum == '' && this.currentRes == 0) {
+                        this.currentNum = '0.';
+                    } else {
+                        this.currentNum = this.showStr;
+                        this.currentNum += '.';
+                        if (this.inEqual) {
+                            this.inEqual = false
+                        }
+                    }
+                    this.showStr = this.currentNum;
+                    this.dotting = true;
+                    document.getElementById('text').value = this.showStr;
+                } else {
+                    return
+                }
+            }
+            opt(o) {
+
+                if (this.currentNum == 0 && this.currentRes == 0) {
+                    return
+                }
+                if (this.currentNum[-1] == '.') {
+                    this.currentNum = this.currentNum.slice(0, -2);
+                }
+                if (this.inEqual) {
+                    this.inEqual = false;
+                }
+                if (this.memoryOpt !== '') {
+                    this.calculate();
+                }
+                this.dotting = false;
+                this.cancelhighlight();
+                switch (o) {
+                    case '+':
+                        this.currentOpt = '+';
+                        this.highlight('plusId');
+                        break;
+                    case '-':
+                        this.currentOpt = '-';
+                        this.highlight('minusId');
+                        break;
+                    case '*':
+                        this.currentOpt = '*';
+                        this.highlight('multiplyId');
+                        break;
+                    case '/':
+                        this.currentOpt = '/';
+                        this.highlight('divideId');
+                        break;
+                }
+
+            }
+
+            swiMinus() {
+
+                if (this.currentOpt == '') {
+                    this.currentNum = (-(parseFloat(this.currentNum))).toString();
+                    this.currentRes = -(this.currentRes);
+                    this.showStr = this.currentNum;
+                    document.getElementById('text').value = this.showStr;
+                } else {
+                    // document.getElementById('useForTest').innerHTML = this.currentNum;
+                    this.currentNum = this.showStr;
+                    this.currentNum = (-(parseFloat(this.currentNum))).toString();
+                    this.showStr = this.currentNum;
+                    document.getElementById('text').value = this.showStr;
+                }
+            }
+
+            percent() {
+                if (this.currentOpt == '') {
+                    this.currentNum = ((parseFloat(this.currentNum)) / 100).toString();
+                    this.currentRes = this.currentNum;
+                    this.showStr = this.currentNum;
+                    document.getElementById('text').value = this.showStr;
+                } else {
+                    this.currentNum = this.showStr;
+                    this.currentNum = ((parseFloat(this.currentNum)) / 100).toString();
+                    this.showStr = this.currentNum;
+                    document.getElementById('text').value = this.showStr;
+                }
+            }
+
+
+
+            highlight(optid) {
+                document.getElementById(optid).className = 'buttonDown';
+            }
+            cancelhighlight() {
+                for (let i of document.getElementsByTagName('button')) {
+                    i.className = 'btn';
+                }
+            }
+        }
+
+        const data = {
+            screenSize: 10
+        }
+
+        const a = new Calculator();
+
+
+        // const getLastNum = ()=>
+        //     bakStr.split("").reverse().join("")
+        //         .match(/\d+.?\d*/)[0].toString()
+        //         .split("").reverse().join("");
+
+    </script>
+</body>
+
+</html>

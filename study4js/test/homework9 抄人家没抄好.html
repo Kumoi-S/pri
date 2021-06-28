@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        border: 0px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -o-user-select:none;
+        user-select:none;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(to right,
+                rgba(255, 186, 221,0.8),
+                rgba(127, 127, 245,0.8)
+                );
+        }
+        #hider{
+            visibility: hidden;
+        }
+        .container{
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0.6),
+                rgba(255,255,255,0.1)
+            );
+            position: absolute;
+            left: 100px;
+            top: 50px;
+            width: 500px;
+            height: 700px;
+            border-radius: 50px;
+            box-shadow: inset -20px -20px 20px rgba(255, 255, 255, 0.4),
+             inset 10px 10px 20px rgba(0,0,0,0.2);
+        }
+        table{
+            margin: auto;
+        }
+        button{
+            width: 100px;
+            height: 100px;
+            background-color: #f4f4f4;
+            font-size: 50px;
+            margin: 2px;
+            transition: background-color 0.4s ease-in-out,
+                        box-shadow 0.4s ease-in-out;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgb(247, 233, 216);
+            box-shadow: inset -5px -5px 10px rgba(255,255,255,0.6),
+                        inset 5px 5px 5px rgba(0,0,0,0.2);
+        }
+        button:active{
+            background-color: rgb(206, 110, 72);
+            transition:0.2s
+        }
+        .buttonDown{
+            background-color: rgb(206, 110, 72);
+            transition: background-color 0.4s ease-in-out;
+        }
+        #text{
+            height: 120px;
+            background-color: aliceblue;
+            text-align: right;
+            width: 418px;
+            margin-left: 41px;
+            margin-top: 70px;
+            border-radius: 10px;
+            font-size: 70px;
+            cursor: default;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+            text-shadow: 0 0 0 #000;
+        }
+        #text:focus{
+            outline: none;
+            color:transparent;
+        }
+        #descripter{
+            position:absolute;
+            left: 640px;
+            top: 700px;
+        }
+    </style>
+</head>
+<body>
+    <p id='useForTest'></p>
+<div id="hider">
+    <p>姓名:宋孟阳</p>
+    <p>学号:2019414033</p>
+    <p>作业:编程作业10</p>
+</div>
+<div class="container">
+    <table>
+        <input type="text" id='text' value="123">
+        <tbody>
+            <tr>
+                <td><button onclick="inNum('1')">1</button></td>
+                <td><button onclick="inNum('2')">2</button></td>
+                <td><button onclick="inNum('3')">3</button></td>
+                <td><button onclick="plus()" id='plusID'>+</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="inNum('4')">4</button></td>
+                <td><button onclick="inNum('5')">5</button></td>
+                <td><button onclick="inNum('6')">6</button></td>
+                <td><button id='minusID' onclick="minus()">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="inNum('7')">7</button></td>
+                <td><button onclick="inNum('8')">8</button></td>
+                <td><button onclick="inNum('9')">9</button></td>
+                <td><button id='multiplyID' onclick="multiply()">*</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="Clear()"     >C</button></td>
+                <td><button onclick="inNum(0)"    >0</button></td>
+                <td><button onclick="equal()">=</button></td>
+                <td><button id='divideID' onclick="divide()">/</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id='descripter'>
+    <p>姓名:宋孟阳</p>
+    <p>学号:2019414033</p>
+    <p>作业:编程作业10</p>
+</div>
+<script>
+    let data = {
+        history = '',   //储存所有输入
+        currentOperator = '', // 储存当前最新的字符串
+        clickOperator = false, //是否刚按了+-*/
+        equal = false,  //是否刚按了 =
+        result = 0
+    }
+    function calculate(his) {
+            return eval(history)
+        }
+    function showResult() {
+        document.getElementById('text').value = data.result;
+    }
+    function inNum(num){
+        if (clickOperator){
+            data.history += data.currentOperator;
+            data.history += num;
+            data.history = '(' + data.history;
+        }
+        else {
+            data.history += num
+        }
+        data.clickOperator = false;
+    }
+    function plus(){
+        data.history = data.history + ')';
+        data.result = calculate(history);
+        showResult();
+        data.clickOperator = true;
+        data.currentOperator = '+';
+    }
+    function minus() {
+            data.result = calculate(history);
+            showResult();
+            
+            data.clickOperator = true;
+            data.currentOperator = '-';
+        }
+    function multiply() {
+            data.result = calculate(history);
+            showResult();
+            data.clickOperator = true;
+            data.currentOperator = '*';
+        }
+    function divide() {
+            data.result = calculate(history);
+            showResult();
+            data.clickOperator = true;
+            data.currentOperator = '/';
+        }
+</script>
+</body>
+</html>

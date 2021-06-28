@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./d3/d3.js"></script>
+</head>
+<body>
+    <p>Apple</p>
+    <p>Pear</p>
+    <p>Banana</p>
+<script>
+
+// // var str = "China";
+
+// var dataset = ["I like dog","I like cat","I like snake"];
+
+// var body = d3.select("body");
+// var p = body.selectAll("p");
+
+// // p.datum(str);
+
+// // p.text((d, i)=>{
+// //     return "第 "+ i + " 个元素绑定的数据是 " + d;
+// // });
+
+// p.data(dataset)
+//     .text((data,index)=>data)
+
+
+//data values 
+var data_values = [10,20,30,40,50,5,2,12,70,26];
+//create rectangles 
+var bars = svg.selectAll("rect")
+.data(data_values)
+.enter()
+.append("rect")
+.attr("width","25px")
+.attr("height", function(d){ return d; });
+
+</script>
+</body>
+</html>

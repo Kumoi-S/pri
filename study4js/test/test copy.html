@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 1000px;
+            height: 500px;
+            margin: auto;
+            position: relative;
+        }
+        .box .img {
+            height: 500px;
+            overflow: hidden;
+        }
+        .box img {
+            width: 1000px;
+            height: 0;
+            float: left;
+            display: block;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .box .img .current {
+            opacity: 1;
+            height: 500px;
+        }
+        .left,
+        .right {
+            position: absolute;
+            width: 50px;
+            height: 100px;
+            background-color: #ccc;
+            top: 50%;
+            margin-top: -50px;
+            line-height: 100px;
+            font-size: 50px;
+            display: none;
+            cursor: pointer;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            right: 0;
+        }
+        .box .button {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+        }
+        .box .button span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            float: left;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+        .box .button .select {
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="img">
+            <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/808804e4f58a25704f60bdc5b5e75cfd.jpg?w=2452&h=920"
+                class="current">
+            <img
+                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5084e471aa2554867cd1c9bf333a83e4.jpg?thumb=1&w=1533&h=575&f=webp&q=90">
+            <img
+                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/175b22f0032803f8bdbd94590c8c6629.jpeg?thumb=1&w=1533&h=575&f=webp&q=90">
+            <img
+                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1c3e97686468231f3f78048d7f2b7fdc.jpg?thumb=1&w=1533&h=575&f=webp&q=90">
+        </div>
+        <div class="change">
+            <div class="left">&lt;</div>
+            <div class="right">&gt;</div>
+        </div>
+        <div class="button">
+            <span class="select">0</span>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            let m = 0;//决定显示哪一张图片
+            let sum = 4;//图片数量
+            let img = document.getElementsByClassName("img")[0];
+            let left = document.getElementsByClassName("left")[0];
+            let right = document.getElementsByClassName("right")[0];
+            let box = document.getElementsByClassName("box")[0];
+            let imgs = document.getElementsByTagName("img");
+            let span = document.getElementsByTagName("span");
+
+            box.addEventListener("mouseenter",mouseEnter,false);
+            box.addEventListener("mouseleave",mouseLeave,false);
+            left.addEventListener("click",changeLeft,false);
+            right.addEventListener("click",changeRight,false);
+            for(var i = 0;i < span.length;i ++) {
+                span[i].addEventListener("click",changePage,false);
+            }
+
+            function mouseEnter() {
+                left.style.display = "block";
+                right.style.display = "block";
+            }
+            function mouseLeave() {
+                left.style.display = "none";
+                right.style.display = "none";
+            }
+            function changeLeft() {//上一张
+                -- m;
+                if(m < 0) {
+                    m = sum - 1;
+                }
+                Change();
+                showButton();
+            }
+            function changeRight() {//下一张
+                ++ m;
+                if(m > sum - 1) {
+                    m = 0;
+                }
+                Change();
+                showButton();
+            }
+            function Change() {
+                for(let i = 0;i < imgs.length;i ++) {
+                    imgs[i].classList.remove("current");
+                }
+                imgs[m].classList.add("current");
+            }
+            function changePage() {//按钮控制图片
+                for(var n = 0;n < sum;n ++) {
+                    span[n].classList.remove("select");
+                }
+                this.classList.add("select");
+                m = this.innerHTML;
+                Change();
+            }
+            function showButton() {//将显示第几个按钮与m的值绑定
+                for(var a = 0;a < sum;a ++) {
+                    span[a].classList.remove("select");
+                }
+                span[m].classList.add("select");
+            }
+        }
+    </script>
+</body>
+
+</html>
